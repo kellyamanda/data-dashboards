@@ -69,7 +69,7 @@ def map(data, lat, lon, zoom):
 t0,t1, t2, t3, t4 = st.beta_columns((1,8,1,12,1))
 
 with t1:
-    title("NYC Ridesharing Data")
+    st.title("NYC Ridesharing Data")
     hour_selected = st.slider("Select hour of pickup", 0, 23)
 
 with t3:
