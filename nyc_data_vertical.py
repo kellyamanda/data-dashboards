@@ -49,7 +49,6 @@ st.title("NYC Ridesharing Data")
 
 st.write(
     """
-    ##
     Examining how Uber pickups vary over time in New York City's and at its major regional airports.
     Slide the slider to view different slices of time and explore different transportation trends.
     """)
