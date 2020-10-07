@@ -47,14 +47,14 @@ def map(data, lat, lon, zoom):
 
 st.title("NYC Ridesharing Data")
 
-hour_selected = st.slider("Select hour of pickup", 0, 23)
-
 st.write(
     """
     ##
     Examining how Uber pickups vary over time in New York City's and at its major regional airports.
-    By sliding the slider on the left you can view different slices of time and explore different transportation trends.
+    Slide the slider to view different slices of time and explore different transportation trends.
     """)
+
+hour_selected = st.slider("Select hour of pickup", 0, 23)
 
 # FILTERING DATA BY HOUR SELECTED
 data = data[data[DATE_TIME].dt.hour == hour_selected]
