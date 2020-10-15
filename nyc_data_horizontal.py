@@ -85,7 +85,7 @@ hour_selected = st.slider("Select hour of pickup", 0, 23)
 data = data[data[DATE_TIME].dt.hour == hour_selected]
 
 # LAYING OUT THE MIDDLE SECTION OF THE APP WITH THE MAPS
-c1, c2, c3, c4, c5 = st.beta_columns((8,.25,4,4,4))
+c1, c2, c3, c4 = st.beta_columns((2,1,1,1))
 
 # SETTING THE ZOOM LOCATIONS FOR THE AIRPORTS
 la_guardia= [40.7900, -73.8700]
@@ -98,15 +98,15 @@ with c1:
     st.write("**All New York City from %i:00 and %i:00**" % (hour_selected, (hour_selected + 1) % 24))
     map(data, midpoint[0], midpoint[1], 11)
 
-with c3:
+with c2:
     st.write("**La Guardia Airport**")
     map(data, la_guardia[0],la_guardia[1], zoom_level)
 
-with c4:
+with c3:
     st.write("**JFK Airport**")
     map(data, jfk[0],jfk[1], zoom_level)
 
-with c5:
+with c4:
     st.write("**Newark Airport**")
     map(data, newark[0],newark[1], zoom_level)
 
@@ -123,7 +123,7 @@ chart_data = pd.DataFrame({"minute": range(60), "pickups": hist})
 
 st.write("")
 
-st.write("**Breakdown by minute between %i:00 and %i:00**" % (hour_selected, (hour_selected + 1) % 24))
+st.write("**Breakdown of rides per minute between %i:00 and %i:00**" % (hour_selected, (hour_selected + 1) % 24))
 
 st.altair_chart(alt.Chart(chart_data)
     .mark_area(
