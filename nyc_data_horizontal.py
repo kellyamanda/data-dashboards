@@ -70,7 +70,6 @@ t1, t2 = st.beta_columns((3,2))
 
 with t1:
     st.title("NYC Ridesharing Data")
-    hour_selected = st.slider("Select hour of pickup", 0, 23)
 
 with t2:
     st.write(
@@ -80,11 +79,13 @@ with t2:
     By sliding the slider on the left you can view different slices of time and explore different transportation trends.
     """)
 
+hour_selected = st.slider("Select hour of pickup", 0, 23)
+
 # FILTERING DATA BY HOUR SELECTED
 data = data[data[DATE_TIME].dt.hour == hour_selected]
 
 # LAYING OUT THE MIDDLE SECTION OF THE APP WITH THE MAPS
-c1, c2, c3, c4, c5 = st.beta_columns((8,1,4,4,4))
+c1, c2, c3, c4, c5 = st.beta_columns((8,.25,4,4,4))
 
 # SETTING THE ZOOM LOCATIONS FOR THE AIRPORTS
 la_guardia= [40.7900, -73.8700]
