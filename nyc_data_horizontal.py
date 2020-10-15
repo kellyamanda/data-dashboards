@@ -66,13 +66,13 @@ def map(data, lat, lon, zoom):
     ))
 
 # LAYING OUT THE TOP SECTION OF THE APP
-t0, t1, t2, t3, t4 = st.beta_columns((1,8,1,12,1))
+t1, t2 = st.beta_columns((3,2))
 
 with t1:
     st.title("NYC Ridesharing Data")
     hour_selected = st.slider("Select hour of pickup", 0, 23)
 
-with t3:
+with t2:
     st.write(
     """
     ##
@@ -84,7 +84,7 @@ with t3:
 data = data[data[DATE_TIME].dt.hour == hour_selected]
 
 # LAYING OUT THE MIDDLE SECTION OF THE APP WITH THE MAPS
-c0, c1, c2, c3, c4, c5, c6 = st.beta_columns((1,8,1,4,4,4,1))
+c1, c2, c3, c4, c5 = st.beta_columns((8,1,4,4,4))
 
 # SETTING THE ZOOM LOCATIONS FOR THE AIRPORTS
 la_guardia= [40.7900, -73.8700]
@@ -119,13 +119,12 @@ hist = np.histogram(filtered[DATE_TIME].dt.minute, bins=60, range=(0, 60))[0]
 chart_data = pd.DataFrame({"minute": range(60), "pickups": hist})
 
 # LAYING OUT THE HISTOGRAM SECTION
-z0, z1, z2 = st.beta_columns((1,21,1))
 
-z1.write("")
+st.write("")
 
-z1.write("**Breakdown by minute between %i:00 and %i:00**" % (hour_selected, (hour_selected + 1) % 24))
+st.write("**Breakdown by minute between %i:00 and %i:00**" % (hour_selected, (hour_selected + 1) % 24))
 
-z1.altair_chart(alt.Chart(chart_data)
+st.altair_chart(alt.Chart(chart_data)
     .mark_area(
         interpolate='step-after',
     ).encode(
