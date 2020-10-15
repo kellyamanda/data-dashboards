@@ -66,12 +66,13 @@ def map(data, lat, lon, zoom):
     ))
 
 # LAYING OUT THE TOP SECTION OF THE APP
-t1, t2 = st.beta_columns((3,2))
+row1_1, row1_2 = st.beta_columns((2,3))
 
-with t1:
+with row1_1:
     st.title("NYC Ridesharing Data BLAH")
+    hour_selected = st.slider("Select hour of pickup", 0, 23)
 
-with t2:
+with row1_2:
     st.write(
     """
     ##
@@ -79,13 +80,11 @@ with t2:
     By sliding the slider on the left you can view different slices of time and explore different transportation trends.
     """)
 
-hour_selected = st.slider("Select hour of pickup", 0, 23)
-
 # FILTERING DATA BY HOUR SELECTED
 data = data[data[DATE_TIME].dt.hour == hour_selected]
 
 # LAYING OUT THE MIDDLE SECTION OF THE APP WITH THE MAPS
-c1, c2, c3, c4 = st.beta_columns((2,1,1,1))
+row2_1, row2_2, row3_3, row4_4 = st.beta_columns((2,1,1,1))
 
 # SETTING THE ZOOM LOCATIONS FOR THE AIRPORTS
 la_guardia= [40.7900, -73.8700]
@@ -94,19 +93,19 @@ newark = [40.7090, -74.1805]
 zoom_level = 12
 midpoint = (np.average(data["lat"]), np.average(data["lon"]))
 
-with c1:
+with row2_1:
     st.write("**All New York City from %i:00 and %i:00**" % (hour_selected, (hour_selected + 1) % 24))
     map(data, midpoint[0], midpoint[1], 11)
 
-with c2:
+with row2_2:
     st.write("**La Guardia Airport**")
     map(data, la_guardia[0],la_guardia[1], zoom_level)
 
-with c3:
+with row2_3:
     st.write("**JFK Airport**")
     map(data, jfk[0],jfk[1], zoom_level)
 
-with c4:
+with row2_4:
     st.write("**Newark Airport**")
     map(data, newark[0],newark[1], zoom_level)
 
