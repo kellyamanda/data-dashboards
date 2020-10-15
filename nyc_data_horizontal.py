@@ -69,7 +69,7 @@ def map(data, lat, lon, zoom):
 t1, t2 = st.beta_columns((3,2))
 
 with t1:
-    st.title("NYC Ridesharing Data")
+    st.title("NYC Ridesharing Data BLAH")
 
 with t2:
     st.write(
